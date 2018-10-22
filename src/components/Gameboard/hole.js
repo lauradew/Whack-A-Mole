@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     width: 110,
     borderRadius: 50,
      backgroundColor: 'transparent'
-  },
+  }
 })
 
 const Hole = () => (

@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 
 const styles = StyleSheet.create({
   containerAnimation: {
-    zIndex: 1,
+    zIndex: .8,
     marginTop: 40,
     justifyContent: 'center',
     alignItems: 'center',
@@ -22,6 +22,8 @@ const styles = StyleSheet.create({
   holeImage: {
     height: 120,
     width: 120,
+    zIndex: 1,
+    marginTop: -20
   },
 });
 
@@ -46,7 +48,7 @@ class Mole extends Component {
       this.animatedValue,
       {
         toValue: 1,
-        duration: 1000, // 2000
+        duration: 1600,
         easing: Easing.linear,
       },
     ).start((a) => {
@@ -64,7 +66,7 @@ class Mole extends Component {
     });
     const movingMargin = this.animatedValue.interpolate({
       inputRange: [0, 0.5, 1.5],
-      outputRange: [60, 190, 50],
+      outputRange: [40, 120, 40]
     });
 
     return (
@@ -97,7 +99,9 @@ class Mole extends Component {
             position: 'absolute',
           }}
         >
-          <View style={{ position: 'relative' }}>
+          <View style={{
+            position: 'relative'
+             }}>
             <Image style={styles.holeImage} source={require('../../../assets/holeMask.png')} resizeMode="contain" />
           </View>
         </Animated.View>

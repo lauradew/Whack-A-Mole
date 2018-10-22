@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   inner: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#C9BF9C',
+    // backgroundColor: '#C9BF9C',
     borderRadius: 50,
     width: 110,
     position: 'relative',

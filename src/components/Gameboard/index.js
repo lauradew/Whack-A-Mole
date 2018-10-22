@@ -12,7 +12,7 @@ const { width } = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#C9BF9C',
+    // backgroundColor: '#C9BF9C',
     paddingTop: 80,
   }
 });
