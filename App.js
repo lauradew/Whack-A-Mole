@@ -1,9 +1,9 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import React from 'react'
+import { StyleSheet, View } from 'react-native'
 import TopSection from './src/components/TopSection/index'
 import Gameboard from './src/components/Gameboard/index'
-import { Provider } from 'react-redux';
-import store from './store';
+import { Provider } from 'react-redux'
+import store from './store'
 
 export default class Game extends React.Component {
   render() {
@@ -16,7 +16,7 @@ export default class Game extends React.Component {
           </View>
         </View>
       </Provider>
-    );
+    )
   }
 }
 
@@ -25,4 +25,4 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff'
   },
-});
+})

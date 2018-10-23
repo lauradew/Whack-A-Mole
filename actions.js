@@ -2,6 +2,7 @@ export const GAMEON = 'GAMEON'
 export const HIT = 'HIT'
 export const ACTIVATE_MOLE = 'ACTIVATE_MOLE'
 export const RESTART = 'RESTART'
+export const DEACTIVATE_MOLE = 'DEACTIVATE_MOLE'
 
 const gameControl = () => {
   return {
@@ -23,10 +24,17 @@ const generateRandomMole = () => {
   }
 }
 
+const deactiveMoleInState = (moleId) => {
+  return {
+    type: DEACTIVATE_MOLE,
+    moleIndex: moleId
+  }
+}
+
 const resetGame = () => {
   return {
     type: RESTART,
   }
 }
 
-export { gameControl, moleWhacked, generateRandomMole, resetGame }
+export { gameControl, moleWhacked, generateRandomMole, deactiveMoleInState, resetGame }

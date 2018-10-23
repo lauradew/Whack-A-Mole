@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { GAMEON, HIT, ACTIVATE_MOLE, RESTART } from './actions'
+import { GAMEON, HIT, ACTIVATE_MOLE, DEACTIVATE_MOLE, RESTART } from './actions'
 
 const initialState = {
   gameOn: false,
@@ -24,6 +24,11 @@ const gameReducer = (state = initialState, action) => {
         ...state,
         board: state.board.map((value, index) => index === action.moleIndex ? true : value)
         // board: state.board.map((value, index) => action.moleIndexArr.indexOf(index) > -1)
+      }
+    case DEACTIVATE_MOLE:
+      return {
+        ...state,
+        board: state.board.map((value, index) => index === action.moleIndex ? false : value)
       }
     case RESTART:
       return {

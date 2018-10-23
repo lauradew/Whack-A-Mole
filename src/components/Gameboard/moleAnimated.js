@@ -9,7 +9,7 @@ import {
   Animated,
   Easing,
 } from 'react-native'
-import { moleWhacked } from '../../../actions'
+import { moleWhacked, deactiveMoleInState } from '../../../actions'
 
 const styles = StyleSheet.create({
   containerAnimation: {
@@ -41,9 +41,14 @@ class Mole extends Component {
     super(props);
     this.state = {
       moleVisible: false,
+      moleIndex: this.props.moleIndex
     }
     this.animatedValue = new Animated.Value(0)
     this.handleTap = this.handleTap.bind(this)
+  }
+
+  componentWillReceiveProps(nextProps){
+    this.setState({ moleIndex: nextProps.moleIndex })
   }
 
   componentDidMount() {
@@ -57,12 +62,13 @@ class Mole extends Component {
       this.animatedValue,
       {
         toValue: 1,
-        duration: 1600,
+        duration: 1200,
         easing: Easing.linear,
       },
     ).start((a) => {
       if (a.finished) {
         this.setState({ moleVisible: false })
+        this.props.dispatch(deactiveMoleInState(this.state.moleIndex))
       }
     })
   }
@@ -71,7 +77,9 @@ class Mole extends Component {
     const { dispatch } = this.props
     if (this.state.moleVisible) {
       this.setState({ moleVisible: false })
-      return dispatch(moleWhacked())
+      dispatch(moleWhacked())
+      dispatch(deactiveMoleInState(this.state.moleIndex))
+      return
     }
     return null
   }

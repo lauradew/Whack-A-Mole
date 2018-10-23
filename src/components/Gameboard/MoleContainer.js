@@ -3,8 +3,6 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import {
   View,
-  Image,
-  Dimensions,
   StyleSheet,
 } from 'react-native'
 import Hole from './hole'
@@ -25,7 +23,7 @@ const styles = StyleSheet.create({
     width: 140,
     position: 'relative',
   },
-});
+})
 
 const mapStateToProps = (store) => {
   return {
@@ -36,13 +34,12 @@ const mapStateToProps = (store) => {
 
 const MoleContainer = ({ index, board, gameOn, dispatch }) => {
   const MoleIsActive = board[index]
-  // const MoleIsActive = true
 
   return (
     <View style={styles.containerMoleAndHole}>
       <Hole />
       {MoleIsActive &&
-        <MoleAnimated />
+        <MoleAnimated moleIndex={index} />
       }
     </View>
   )

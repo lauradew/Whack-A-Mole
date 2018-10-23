@@ -1,7 +1,7 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { View, Text, Image, StyleSheet } from 'react-native';
-import PropTypes from 'prop-types';
+import React from 'react'
+import { connect } from 'react-redux'
+import { View, Text, Image, StyleSheet } from 'react-native'
+import PropTypes from 'prop-types'
 
 const styles = StyleSheet.create({
   scoreContainer: {
@@ -20,25 +20,25 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#603800',
   },
-});
+})
 
 const ScoreButton = ({ score }) => (
   <View style={styles.scoreContainer}>
     <Image style={{ width: 140 }} source={require('../../../assets/gameBtn.png')} resizeMode="contain" />
     <Text style={styles.textScore}>{score}</Text>
   </View>
-);
+)
 
 
 const mapStateToProps = (store) => {
   return {
     score: store.gameReducer.score,
-  };
-};
+  }
+}
 
 
 ScoreButton.propTypes = {
   score: PropTypes.number.isRequired,
-};
+}
 
-export default connect(mapStateToProps)(ScoreButton);
+export default connect(mapStateToProps)(ScoreButton)

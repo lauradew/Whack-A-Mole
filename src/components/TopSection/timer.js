@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     left: -110,
     top: 60
   }
-});
+})
 
 const mapStateToProps = (store) => {
   return {
@@ -61,24 +61,24 @@ class Timer extends React.Component {
   }
 
   componentWillUnmount() {
-    clearInterval(this.intervalId);
+    clearInterval(this.intervalId)
   }
 
   handleTimer = () => {
-    const { dispatch } = this.props;
-    const { minutes, seconds } = this.state;
+    const { dispatch } = this.props
+    const { minutes, seconds } = this.state
 
-    if (minutes === 1 && seconds === 50) {
-      this.setState({ gameOver: true });
-      clearInterval(this.intervalId);
-      dispatch(gameControl());
-      return;
+    if (minutes === 0 && seconds === 0) {
+      this.setState({ gameOver: true })
+      clearInterval(this.intervalId)
+      dispatch(gameControl())
+      return
     }
     if (seconds > 0) {
-      this.setState({ seconds: seconds - 1 });
+      this.setState({ seconds: seconds - 1 })
     }
     if (seconds === 0 && minutes > 0) {
-      this.setState({ minutes: 0, seconds: 60 });
+      this.setState({ minutes: 0, seconds: 60 })
     }
   }
 
@@ -91,17 +91,15 @@ class Timer extends React.Component {
         gameOver: false
       })
       dispatch(resetGame())
-      this.intervalId = setInterval(this.handleTimer, 1000)
-      dispatch(gameControl())
-      // this.props.dispatch(generateRandomMole())
+      this.startGame()
       return
     }
     return null
   }
 
   startGame() {
-    this.intervalId = setInterval(this.handleTimer, 1000);
-    this.props.dispatch(gameControl());
+    this.intervalId = setInterval(this.handleTimer, 1000)
+    this.props.dispatch(gameControl())
   }
 
   render() {
