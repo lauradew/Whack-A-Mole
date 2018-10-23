@@ -60,7 +60,7 @@ class Timer extends React.Component {
     const { dispatch } = this.props;
     const { minutes, seconds } = this.state;
 
-    if (minutes === 0 && seconds === 0) {
+    if (minutes === 1 && seconds === 50) {
       this.setState({ gameOver: true });
       clearInterval(this.intervalId);
       dispatch(gameControl());
@@ -83,6 +83,7 @@ class Timer extends React.Component {
       })
       this.props.dispatch(resetGame())
       this.intervalId = setInterval(this.handleTimer, 1000)
+      this.props.dispatch(gameControl())
       return
     }
     return null
@@ -94,7 +95,7 @@ class Timer extends React.Component {
       <View style={styles.timerContainer}>
         <Image style={{ width: 140 }} source={require('../../../assets/gameBtn.png')} resizeMode="contain" />
         <Text style={styles.textTimer}>{`${minutes}:${seconds}`}</Text>
-        {gameOver && AlertIOS.alert('Game Over')}
+        {gameOver && AlertIOS.alert(`Game Over, Score: ${this.props.score}`)}
         {gameOver &&
           <View style={styles.timerContainer}>
           <TouchableOpacity
