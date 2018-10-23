@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { View, Text, Image, StyleSheet, AlertIOS, TouchableOpacity } from 'react-native'
 import PropTypes from 'prop-types'
-import { gameControl, resetGame, generateRandomMole } from '../../../actions'
+import { gameControl, resetGame } from '../../../actions'
 
 const styles = StyleSheet.create({
   timerContainer: {
@@ -21,13 +21,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#603800',
   },
-  tryAgain: {
+  gameBtn: {
     width: 400,
     top: 50,
     left: -240,
     position: 'absolute'
   },
-  tryAgainText: {
+  gameBtnText: {
     position: 'absolute',
     fontSize: 32,
     fontWeight: 'bold',
@@ -35,6 +35,13 @@ const styles = StyleSheet.create({
     top: 60
   }
 });
+
+const mapStateToProps = (store) => {
+  return {
+    score: store.gameReducer.score,
+    gameOn: store.gameReducer.gameOn
+  }
+}
 
 class Timer extends React.Component {
   constructor(props) {
@@ -44,12 +51,13 @@ class Timer extends React.Component {
       seconds: 59,
       gameOver: false
     }
+    this.startGame = this.startGame.bind(this)
     this.resetGame = this.resetGame.bind(this)
   }
 
   componentDidMount() {
-    this.intervalId = setInterval(this.handleTimer, 1000);
-    this.props.dispatch(gameControl());
+    // this.intervalId = setInterval(this.handleTimer, 1000);
+    // this.props.dispatch(gameControl());
   }
 
   componentWillUnmount() {
@@ -76,18 +84,24 @@ class Timer extends React.Component {
 
   resetGame() {
     if (this.state.gameOver) {
+      const { dispatch } = this.props;
       this.setState({
         minutes: 1,
         seconds: 59,
         gameOver: false
       })
-      this.props.dispatch(resetGame())
+      dispatch(resetGame())
       this.intervalId = setInterval(this.handleTimer, 1000)
-      this.props.dispatch(gameControl())
-      this.props.dispatch(generateRandomMole())
+      dispatch(gameControl())
+      // this.props.dispatch(generateRandomMole())
       return
     }
     return null
+  }
+
+  startGame() {
+    this.intervalId = setInterval(this.handleTimer, 1000);
+    this.props.dispatch(gameControl());
   }
 
   render() {
@@ -102,8 +116,18 @@ class Timer extends React.Component {
           <TouchableOpacity
             onPress={this.resetGame}
           >
-          <Image style={styles.tryAgain} source={require('../../../assets/gameBtn.png')} resizeMode="contain" />
-          <Text style={styles.tryAgainText}>Try Again</Text>
+          <Image style={styles.gameBtn} source={require('../../../assets/gameBtn.png')} resizeMode="contain" />
+          <Text style={styles.gameBtnText}>Try Again</Text>
+          </TouchableOpacity>
+          </View>
+        }
+        {!this.props.gameOn && !gameOver &&
+          <View style={styles.timerContainer}>
+          <TouchableOpacity
+            onPress={this.startGame}
+          >
+          <Image style={styles.gameBtn} source={require('../../../assets/gameBtn.png')} resizeMode="contain" />
+          <Text style={styles.gameBtnText}>Start</Text>
           </TouchableOpacity>
           </View>
         }
@@ -111,13 +135,6 @@ class Timer extends React.Component {
     )
   }
 }
-
-const mapStateToProps = (store) => {
-  return {
-    score: store.gameReducer.score,
-  };
-};
-
 
 Timer.propTypes = {
   score: PropTypes.number.isRequired,

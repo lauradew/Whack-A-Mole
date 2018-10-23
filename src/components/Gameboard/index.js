@@ -13,9 +13,6 @@ import { generateRandomMole } from '../../../actions'
 const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
-  preGame: {
-    alignSelf: 'center'
-  },
   boardContainer: {
     flex: 1,
     backgroundColor: '#C9BF9C',
@@ -45,14 +42,35 @@ const mapStateToProps = (store) => {
 
 
 class Gameboard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      gameOn: props.gameOn
+    }
+  }
+
+  componentWillReceiveProps(nextProps){
+    this.setState({ gameOn: nextProps.gameOn })
+    if (nextProps.gameOn) {
+      this.startInterval()
+    }
+  }
+
   componentDidMount() {
-    const randomDelay = (Math.random() * 400) + 200;
+    this.startInterval()
+  }
+
+  startInterval(){
+    if (this.intervalId) {
+      clearInterval(this.intervalId)
+    }
+    const randomDelay = (Math.random() * 300) + 100;
     this.intervalId = setInterval(this.activateMole, randomDelay);
   }
 
   activateMole = () => {
-    const { dispatch, gameOn } = this.props
-    if (gameOn) {
+    let { dispatch, gameOn } = this.props
+    if (this.state.gameOn) {
       dispatch(generateRandomMole())
       return
     }

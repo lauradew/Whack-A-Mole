@@ -1,14 +1,14 @@
-import React from 'react';
+import React from 'react'
 import {
   View,
   Image,
   Dimensions,
   StyleSheet,
-} from 'react-native';
+} from 'react-native'
 import ScoreButton from './scoreButton'
 import Timer from './timer'
 
-const { width } = Dimensions.get('window');
+const { width } = Dimensions.get('window')
 
 const styles = StyleSheet.create({
   container: {
@@ -23,18 +23,34 @@ const styles = StyleSheet.create({
     width: undefined,
     height: undefined,
   },
-});
+  startBtn: {
+    width: 400,
+    top: 50,
+    left: -240,
+    position: 'absolute'
+  },
+  startBtnText: {
+    position: 'absolute',
+    fontSize: 32,
+    fontWeight: 'bold',
+    left: -110,
+    top: 60
+  }
+})
 
-const TopSection = () => (
-  <View style={styles.container}>
-    <ScoreButton />
-    <Timer />
-    <Image
-      style={styles.imageBackground}
-      source={require('../../../assets/game-screen-top.png')}
-    />
-  </View>
-);
+class TopSection extends React.Component {
 
+render() {
+  return (
+    <View style={styles.container}>
+      <ScoreButton />
+      <Timer />
+      <Image
+        style={styles.imageBackground}
+        source={require('../../../assets/game-screen-top.png')}
+      />
+    </View>
+  )}
+}
 
-export default TopSection;
+export default TopSection
