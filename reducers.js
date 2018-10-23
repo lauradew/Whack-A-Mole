@@ -10,7 +10,7 @@ const gameReducer = (state = initialState, action) => {
     case HIT:
       return {
         ...state,
-        score: state.score + 10,
+        score: state.score + 10
       }
 
     default:

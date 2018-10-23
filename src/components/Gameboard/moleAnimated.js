@@ -23,22 +23,18 @@ const styles = StyleSheet.create({
   },
   holeMask: {
     height: 140,
-    width: 140,
+    width: 150,
     zIndex: 1,
     marginTop: -20,
+    right: 5,
   },
   moleStyle: {
     height: 140,
     width: 140,
     zIndex: 1,
     marginTop: -30,
-  },
-  // extraMask: {
-  //   height: 20,
-  //   width: 120,
-  //   backgroundColor: '#C9BF9C',
-  // }
-});
+  }
+})
 
 
 class Mole extends Component {
@@ -46,18 +42,18 @@ class Mole extends Component {
     super(props);
     this.state = {
       moleVisible: false,
-    };
-    this.animatedValue = new Animated.Value(0);
+    }
+    this.animatedValue = new Animated.Value(0)
     this.handleTap = this.handleTap.bind(this)
   }
 
   componentDidMount() {
-    this.animate();
+    this.animate()
   }
 
   animate() {
-    this.setState({ moleVisible: true });
-    this.animatedValue.setValue(0);
+    this.setState({ moleVisible: true })
+    this.animatedValue.setValue(0)
     Animated.timing(
       this.animatedValue,
       {
@@ -67,18 +63,18 @@ class Mole extends Component {
       },
     ).start((a) => {
       if (a.finished) {
-        this.setState({ moleVisible: false });
+        this.setState({ moleVisible: false })
       }
-    });
+    })
   }
 
   handleTap() {
-    const { dispatch } = this.props;
+    const { dispatch } = this.props
     if (this.state.moleVisible) {
       this.setState({ moleVisible: false })
-      return dispatch(moleWhacked());
+      return dispatch(moleWhacked())
     }
-    return null;
+    return null
   }
 
 
@@ -86,11 +82,11 @@ class Mole extends Component {
     const opacity = this.animatedValue.interpolate({
       inputRange: [0, .25, 0.5, 1],
       outputRange: [0, 1, 3, .5],
-    });
+    })
     const movingMargin = this.animatedValue.interpolate({
       inputRange: [0, 0.5, 1.5],
       outputRange: [40, 120, 40]
-    });
+    })
 
     return (
       <View style={styles.containerAnimation}>
