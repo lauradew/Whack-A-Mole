@@ -5,6 +5,7 @@ import {
   Dimensions,
   StyleSheet,
 } from 'react-native';
+import ScoreButton from './scoreButton'
 
 const { width } = Dimensions.get('window');
 
@@ -23,9 +24,9 @@ const styles = StyleSheet.create({
   },
 });
 
-
 const TopSection = () => (
   <View style={styles.container}>
+    <ScoreButton />
     <Image
       style={styles.imageBackground}
       source={require('../../../assets/game-screen-top.png')}

@@ -1,4 +1,6 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import {
   View,
   Image,
@@ -14,14 +16,14 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     alignSelf: 'center',
     borderRadius: 50,
-    width: 120,
+    width: 140,
   },
   inner: {
     justifyContent: 'center',
     alignItems: 'center',
     // backgroundColor: '#C9BF9C',
     borderRadius: 50,
-    width: 110,
+    width: 140,
     position: 'relative',
   },
 });
@@ -32,5 +34,9 @@ const MoleContainer = () => (
     <MoleAnimated />
   </View>
 )
+
+// MoleContainer.propTypes = {
+//   dispatch: PropTypes.func.isRequired,
+// }
 
 export default MoleContainer

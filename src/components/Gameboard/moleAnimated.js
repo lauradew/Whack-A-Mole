@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import {
   StyleSheet,
   View,
@@ -6,8 +8,8 @@ import {
   Image,
   Animated,
   Easing,
-} from 'react-native';
-import { connect } from 'react-redux';
+} from 'react-native'
+import { moleWhacked } from '../../../actions'
 
 const styles = StyleSheet.create({
   containerAnimation: {
@@ -17,14 +19,25 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: 10,
     backgroundColor: 'transparent',
-    position: 'relative'
+    position: 'relative',
   },
-  holeImage: {
-    height: 120,
-    width: 120,
+  holeMask: {
+    height: 140,
+    width: 140,
     zIndex: 1,
-    marginTop: -20
+    marginTop: -20,
   },
+  moleStyle: {
+    height: 140,
+    width: 140,
+    zIndex: 1,
+    marginTop: -30,
+  },
+  // extraMask: {
+  //   height: 20,
+  //   width: 120,
+  //   backgroundColor: '#C9BF9C',
+  // }
 });
 
 
@@ -35,6 +48,7 @@ class Mole extends Component {
       moleVisible: false,
     };
     this.animatedValue = new Animated.Value(0);
+    this.handleTap = this.handleTap.bind(this)
   }
 
   componentDidMount() {
@@ -58,11 +72,20 @@ class Mole extends Component {
     });
   }
 
+  handleTap() {
+    const { dispatch } = this.props;
+    if (this.state.moleVisible) {
+      this.setState({ moleVisible: false })
+      return dispatch(moleWhacked());
+    }
+    return null;
+  }
+
 
   render() {
     const opacity = this.animatedValue.interpolate({
-      inputRange: [0, 0.5, 1],
-      outputRange: [0, 3, 0],
+      inputRange: [0, .25, 0.5, 1],
+      outputRange: [0, 1, 3, .5],
     });
     const movingMargin = this.animatedValue.interpolate({
       inputRange: [0, 0.5, 1.5],
@@ -80,21 +103,22 @@ class Mole extends Component {
             backgroundColor: 'transparent',
           }}
         >
+          {this.state.moleVisible &&
           <View>
             <TouchableOpacity
               style={{ position: 'relative' }}
               onPress={this.handleTap}
             >
-              <Image style={styles.holeImage} source={require('../../../assets/mole.png')} resizeMode="contain" />
+              <Image style={styles.moleStyle} source={require('../../../assets/mole.png')} resizeMode="contain" />
             </TouchableOpacity>
           </View>
+          }
         </Animated.View>
         <Animated.View
           style={{
-            opacity,
             marginTop: 10,
-            height: 120,
-            width: 120,
+            height: 140,
+            width: 140,
             backgroundColor: 'transparent',
             position: 'absolute',
           }}
@@ -102,7 +126,7 @@ class Mole extends Component {
           <View style={{
             position: 'relative'
              }}>
-            <Image style={styles.holeImage} source={require('../../../assets/holeMask.png')} resizeMode="contain" />
+            <Image style={styles.holeMask} source={require('../../../assets/holeMask.png')} resizeMode="contain" />
           </View>
         </Animated.View>
       </View>
@@ -110,5 +134,8 @@ class Mole extends Component {
   }
 }
 
+Mole.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+}
 
 export default connect()(Mole)

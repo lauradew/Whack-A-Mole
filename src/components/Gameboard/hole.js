@@ -16,8 +16,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent'
   },
   holeImg: {
-    height: 110,
-    width: 110,
+    height: 140,
+    width: 140,
     borderRadius: 50,
      backgroundColor: 'transparent'
   }
