@@ -1,4 +1,6 @@
-import React from 'react';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import {
   View,
   Image,
@@ -6,10 +8,14 @@ import {
   StyleSheet,
 } from 'react-native';
 import MoleContainer from './MoleContainer'
+import { generateRandomMole } from '../../../actions'
 
 const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
+  preGame: {
+    alignSelf: 'center'
+  },
   boardContainer: {
     flex: 1,
     backgroundColor: '#C9BF9C',
@@ -31,32 +37,58 @@ const styles = StyleSheet.create({
   }
 });
 
-
-const Gameboard = () => (
-  <View style={styles.boardContainer}>
-    <View style={styles.rowContainer}>
-      <MoleContainer />
-      <MoleContainer />
-    </View>
-    <View style={styles.rowContainer}>
-      <MoleContainer />
-    </View>
-    <View style={styles.rowContainer}>
-      <MoleContainer />
-      <MoleContainer />
-    </View>
-    <View style={styles.rowContainer}>
-      <MoleContainer />
-    </View>
-    <View style={styles.rowContainer}>
-      <MoleContainer />
-      <MoleContainer />
-    </View>
-    <View style={styles.rowContainer}>
-      <MoleContainer />
-    </View>
-  </View>
-);
+const mapStateToProps = (store) => {
+  return {
+    gameOn: store.gameReducer.gameOn,
+  }
+}
 
 
-export default Gameboard;
+class Gameboard extends React.Component {
+  componentDidMount() {
+    this.intervalId = setInterval(this.activateMole, 1300);
+  }
+
+  activateMole = () => {
+    const { dispatch, gameOn } = this.props
+    if (gameOn) {
+      dispatch(generateRandomMole())
+      return
+    }
+    clearInterval(this.intervalId)
+  }
+
+render() {
+  return (
+    <View style={styles.boardContainer}>
+      <View style={styles.rowContainer}>
+        <MoleContainer index={0} />
+        <MoleContainer index={1} />
+      </View>
+      <View style={styles.rowContainer}>
+        <MoleContainer index={2} />
+      </View>
+      <View style={styles.rowContainer}>
+        <MoleContainer index={3} />
+        <MoleContainer index={4} />
+      </View>
+      <View style={styles.rowContainer}>
+        <MoleContainer index={5} />
+      </View>
+      <View style={styles.rowContainer}>
+        <MoleContainer index={6} />
+        <MoleContainer index={7} />
+      </View>
+      <View style={styles.rowContainer}>
+        <MoleContainer index={8} />
+      </View>
+    </View>
+  )}
+}
+
+Gameboard.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  gameOn: PropTypes.bool.isRequired
+}
+
+export default connect(mapStateToProps)(Gameboard)

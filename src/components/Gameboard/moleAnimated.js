@@ -25,14 +25,14 @@ const styles = StyleSheet.create({
     height: 140,
     width: 150,
     zIndex: 1,
-    marginTop: -20,
+    // marginTop: -5,
     right: 5,
   },
   moleStyle: {
     height: 140,
     width: 140,
     zIndex: 1,
-    marginTop: -30,
+    marginTop: -20,
   }
 })
 

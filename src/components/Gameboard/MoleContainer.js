@@ -21,22 +21,38 @@ const styles = StyleSheet.create({
   inner: {
     justifyContent: 'center',
     alignItems: 'center',
-    // backgroundColor: '#C9BF9C',
     borderRadius: 50,
     width: 140,
     position: 'relative',
   },
 });
 
-const MoleContainer = () => (
-  <View style={styles.container}>
-    <Hole />
-    <MoleAnimated />
-  </View>
-)
+const mapStateToProps = (store) => {
+  return {
+    board: store.gameReducer.board,
+    gameOn: store.gameReducer.gameOn,
+  }
+}
 
-// MoleContainer.propTypes = {
-//   dispatch: PropTypes.func.isRequired,
-// }
+const MoleContainer = ({ index, board, gameOn, dispatch }) => {
+  const MoleIsActive = board[index]
+  // const MoleIsActive = true
 
-export default MoleContainer
+  return (
+    <View style={styles.containerMoleAndHole}>
+      <Hole />
+      {MoleIsActive &&
+        <MoleAnimated />
+      }
+    </View>
+  )
+}
+
+MoleContainer.propTypes = {
+  index: PropTypes.number.isRequired,
+  board: PropTypes.array.isRequired,
+  gameOn: PropTypes.bool.isRequired,
+  dispatch: PropTypes.func.isRequired,
+}
+
+export default connect(mapStateToProps)(MoleContainer)
