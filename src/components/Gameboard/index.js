@@ -46,7 +46,8 @@ const mapStateToProps = (store) => {
 
 class Gameboard extends React.Component {
   componentDidMount() {
-    this.intervalId = setInterval(this.activateMole, 1300);
+    const randomDelay = (Math.random() * 400) + 200;
+    this.intervalId = setInterval(this.activateMole, randomDelay);
   }
 
   activateMole = () => {

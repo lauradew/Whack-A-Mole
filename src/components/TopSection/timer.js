@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { View, Text, Image, StyleSheet, AlertIOS, TouchableOpacity } from 'react-native'
 import PropTypes from 'prop-types'
-import { gameControl, resetGame } from '../../../actions'
+import { gameControl, resetGame, generateRandomMole } from '../../../actions'
 
 const styles = StyleSheet.create({
   timerContainer: {
@@ -84,6 +84,7 @@ class Timer extends React.Component {
       this.props.dispatch(resetGame())
       this.intervalId = setInterval(this.handleTimer, 1000)
       this.props.dispatch(gameControl())
+      this.props.dispatch(generateRandomMole())
       return
     }
     return null

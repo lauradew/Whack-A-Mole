@@ -19,6 +19,7 @@ const generateRandomMole = () => {
   return {
     type: ACTIVATE_MOLE,
     moleIndex: Math.floor(Math.random() * Math.floor(10)),
+    moleIndexArr: [1, 3, 5]//Math.floor(Math.random() * Math.floor(10)),
   }
 }
 

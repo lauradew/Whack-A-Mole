@@ -22,12 +22,12 @@ const gameReducer = (state = initialState, action) => {
     case ACTIVATE_MOLE:
       return {
         ...state,
-        board: state.board.map((value, index) => index === action.moleIndex)
+        board: state.board.map((value, index) => index === action.moleIndex ? true : value)
+        // board: state.board.map((value, index) => action.moleIndexArr.indexOf(index) > -1)
       }
     case RESTART:
       return {
         ...state,
-        gameOn: state.gameOn,
         score: 0
       }
     default:
