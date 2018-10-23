@@ -25,7 +25,6 @@ const styles = StyleSheet.create({
     height: 140,
     width: 150,
     zIndex: 1,
-    // marginTop: -5,
     right: 5,
   },
   moleStyle: {
