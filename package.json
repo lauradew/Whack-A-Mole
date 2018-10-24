@@ -1,5 +1,6 @@
 {
-  "name": "empty-project-template",
+  "author": "Laura De Witt",
+  "name": "whack-a-mole",
   "main": "node_modules/expo/AppEntry.js",
   "private": true,
   "scripts": {
