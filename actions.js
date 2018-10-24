@@ -1,5 +1,6 @@
 export const GAMEON = 'GAMEON'
 export const HIT = 'HIT'
+export const MISSED = 'MISSED'
 export const ACTIVATE_MOLE = 'ACTIVATE_MOLE'
 export const RESTART = 'RESTART'
 export const DEACTIVATE_MOLE = 'DEACTIVATE_MOLE'
@@ -13,6 +14,12 @@ const gameControl = () => {
 const moleWhacked = () => {
   return {
     type: HIT,
+  }
+}
+
+const moleMissed = () => {
+  return {
+    type: MISSED,
   }
 }
 
@@ -37,4 +44,4 @@ const resetGame = () => {
   }
 }
 
-export { gameControl, moleWhacked, generateRandomMole, deactiveMoleInState, resetGame }
+export { gameControl, moleWhacked, moleMissed, generateRandomMole, deactiveMoleInState, resetGame }

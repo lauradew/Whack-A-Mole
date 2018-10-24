@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux'
-import { GAMEON, HIT, ACTIVATE_MOLE, DEACTIVATE_MOLE, RESTART } from './actions'
+import { GAMEON, HIT, MISSED, ACTIVATE_MOLE, DEACTIVATE_MOLE, RESTART } from './actions'
 
 const initialState = {
   gameOn: false,
   board: [false, false, false, false, false, false, false, false, false],
   score: 0,
+  hit: 0
 }
 
 const gameReducer = (state = initialState, action) => {
@@ -17,7 +18,13 @@ const gameReducer = (state = initialState, action) => {
     case HIT:
       return {
         ...state,
-        score: state.score + 10
+        score: state.score + 10,
+        hit: state.hit + 1
+      }
+    case MISSED:
+      return {
+        ...state,
+        score: state.score -3
       }
     case ACTIVATE_MOLE:
       return {
@@ -33,7 +40,8 @@ const gameReducer = (state = initialState, action) => {
     case RESTART:
       return {
         ...state,
-        score: 0
+        score: 0,
+        hit: 0
       }
     default:
       return state

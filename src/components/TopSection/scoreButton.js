@@ -11,6 +11,13 @@ const styles = StyleSheet.create({
     top: 30,
     zIndex: 1,
   },
+  hitContainer: {
+    position: 'absolute',
+    width: 140,
+    left: 10,
+    top: 80,
+    zIndex: 1,
+  },
   textScore: {
     position: 'absolute',
     zIndex: 2,
@@ -20,25 +27,39 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#603800',
   },
+  container: {
+    zIndex: 1,
+  }
 })
 
-const ScoreButton = ({ score }) => (
-  <View style={styles.scoreContainer}>
-    <Image style={{ width: 140 }} source={require('../../../assets/gameBtn.png')} resizeMode="contain" />
-    <Text style={styles.textScore}>{score}</Text>
-  </View>
-)
+class ScoreButton extends React.Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <View style={styles.scoreContainer}>
+          <Image style={{ width: 140 }} source={require('../../../assets/gameBtn.png')} resizeMode="contain" />
+          <Text style={styles.textScore}>{this.props.score}</Text>
+        </View>
+        <View style={styles.hitContainer}>
+          <Image style={{ width: 140 }} source={require('../../../assets/gameBtn.png')} resizeMode="contain" />
+          <Text style={styles.textScore}>{this.props.hit}</Text>
+        </View>
+      </View>
+    )
+  }
+}
 
 
 const mapStateToProps = (store) => {
   return {
     score: store.gameReducer.score,
+    hit: store.gameReducer.hit
   }
 }
 
-
 ScoreButton.propTypes = {
   score: PropTypes.number.isRequired,
+  hit: PropTypes.number.isRequired,
 }
 
 export default connect(mapStateToProps)(ScoreButton)

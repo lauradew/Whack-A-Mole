@@ -112,7 +112,10 @@ class Mole extends Component {
               style={{ position: 'relative' }}
               onPress={this.handleTap}
             >
-              <Image style={styles.moleStyle} source={require('../../../assets/mole.png')} resizeMode="contain" />
+              <Image
+              style={styles.moleStyle}
+              source={require('../../../assets/mole.png')}
+              resizeMode="contain" />
             </TouchableOpacity>
           </View>
           }

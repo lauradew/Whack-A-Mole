@@ -4,9 +4,11 @@ import PropTypes from 'prop-types'
 import {
   View,
   StyleSheet,
+  TouchableOpacity
 } from 'react-native'
 import Hole from './hole'
 import MoleAnimated from './moleAnimated'
+import { moleMissed } from '../../../actions'
 
 const styles = StyleSheet.create({
   containerMoleAndHole: {
@@ -32,18 +34,43 @@ const mapStateToProps = (store) => {
   }
 }
 
-const MoleContainer = ({ index, board, gameOn, dispatch }) => {
-  const MoleIsActive = board[index]
+// const MoleContainer = ({ index, board, gameOn, dispatch }) => {
 
+class MoleContainer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      moleIndex: this.props.index
+    }
+    this.handleMiss = this.handleMiss.bind(this)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({ moleIndex: nextProps.index })
+  }
+
+  handleMiss() {
+    if (this.props.gameOn) {
+      return this.props.dispatch(moleMissed())
+    }
+    return null
+  }
+
+  render() {
+  const MoleIsActive = this.props.board[this.state.moleIndex]
   return (
-    <View style={styles.containerMoleAndHole}>
+    <View style={styles.containerMoleAndHole} >
+      <TouchableOpacity onPress={this.handleMiss}>
       <Hole />
       {MoleIsActive &&
-        <MoleAnimated moleIndex={index} />
+        <MoleAnimated moleIndex={this.state.moleIndex} />
       }
+      </TouchableOpacity>
     </View>
   )
+  }
 }
+
 
 MoleContainer.propTypes = {
   index: PropTypes.number.isRequired,

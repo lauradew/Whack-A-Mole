@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   },
   gameBtn: {
     width: 400,
-    top: 50,
+    top: 80,
     left: -240,
     position: 'absolute'
   },
@@ -32,13 +32,14 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontWeight: 'bold',
     left: -110,
-    top: 60
+    top: 90
   }
 })
 
 const mapStateToProps = (store) => {
   return {
     score: store.gameReducer.score,
+    hit: store.gameReducer.hit,
     gameOn: store.gameReducer.gameOn
   }
 }
@@ -108,7 +109,7 @@ class Timer extends React.Component {
       <View style={styles.timerContainer}>
         <Image style={{ width: 140 }} source={require('../../../assets/gameBtn.png')} resizeMode="contain" />
         <Text style={styles.textTimer}>{`${minutes}:${seconds}`}</Text>
-        {gameOver && AlertIOS.alert(`Game Over, Score: ${this.props.score}`)}
+        {gameOver && AlertIOS.alert(`Game Over, Score: ${this.props.score}, Moles hit: ${this.props.hit}`)}
         {gameOver &&
           <View style={styles.timerContainer}>
           <TouchableOpacity
@@ -136,6 +137,7 @@ class Timer extends React.Component {
 
 Timer.propTypes = {
   score: PropTypes.number.isRequired,
+  hit: PropTypes.number.isRequired,
   dispatch: PropTypes.func.isRequired,
 }
 
