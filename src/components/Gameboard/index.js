@@ -15,10 +15,9 @@ const { width } = Dimensions.get('window')
 const styles = StyleSheet.create({
   boardContainer: {
     flex: 1,
-    backgroundColor: '#C9BF9C',
-    paddingTop: 30,
     paddingBottom: 10,
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    marginBottom: 140
   },
   rowContainer: {
     flex: 1,

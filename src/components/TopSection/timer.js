@@ -109,7 +109,7 @@ class Timer extends React.Component {
       <View style={styles.timerContainer}>
         <Image style={{ width: 140 }} source={require('../../../assets/gameBtn.png')} resizeMode="contain" />
         <Text style={styles.textTimer}>{`${minutes}:${seconds}`}</Text>
-        {gameOver && AlertIOS.alert(`Game Over, Score: ${this.props.score}, Moles hit: ${this.props.hit}`)}
+        {gameOver && AlertIOS.alert(`Game Over\n\nScore: ${this.props.score}\nMoles hit: ${this.props.hit}`)}
         {gameOver &&
           <View style={styles.timerContainer}>
           <TouchableOpacity

@@ -9,7 +9,6 @@ const styles = StyleSheet.create({
   containerAnimation: {
     zIndex: 0,
     position: 'absolute',
-    height: 10,
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
@@ -20,15 +19,26 @@ const styles = StyleSheet.create({
     width: 140,
     borderRadius: 50,
      backgroundColor: 'transparent'
+  },
+  holeMask: {
+    position: 'absolute',
+    zIndex: 1,
+    left: -5,
+    width: 155,
+    justifyContent: 'center',
+    marginTop: 25
   }
 })
 
 const Hole = () => (
-  <View style={styles.containerAnimation}>
-    <Image style={styles.holeImg} source={require('../../../assets/hole.png')} resizeMode="contain" />
+  <View>
+    <View style={styles.containerAnimation}>
+      <Image style={styles.holeImg} source={require('../../../assets/hole.png')} resizeMode="contain" />
+    </View>
+    <View>
+      <Image style={styles.holeMask} source={require('../../../assets/holeMask.png')} resizeMode="contain" />
+    </View>
   </View>
 )
-
-
 
 export default Hole

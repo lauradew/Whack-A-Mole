@@ -23,6 +23,6 @@ export default class Game extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff'
+    backgroundColor: '#C9BF9C'
   },
 })

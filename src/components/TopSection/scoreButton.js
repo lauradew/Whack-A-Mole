@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#603800',
   },
-  container: {
+  topContainer: {
     zIndex: 1,
   }
 })
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
 class ScoreButton extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styles.topContainer}>
         <View style={styles.scoreContainer}>
           <Image style={{ width: 140 }} source={require('../../../assets/gameBtn.png')} resizeMode="contain" />
           <Text style={styles.textScore}>{this.props.score}</Text>

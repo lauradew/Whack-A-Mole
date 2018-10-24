@@ -12,6 +12,7 @@ import { moleMissed } from '../../../actions'
 
 const styles = StyleSheet.create({
   containerMoleAndHole: {
+    height: 140,
     justifyContent: 'center',
     alignContent: 'center',
     alignSelf: 'center',
@@ -23,8 +24,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 50,
     width: 140,
-    position: 'relative',
-  },
+  }
 })
 
 const mapStateToProps = (store) => {
@@ -60,7 +60,7 @@ class MoleContainer extends React.Component {
   const MoleIsActive = this.props.board[this.state.moleIndex]
   return (
     <View style={styles.containerMoleAndHole} >
-      <TouchableOpacity onPress={this.handleMiss}>
+      <TouchableOpacity style={styles.containerMoleAndHole} onPress={this.handleMiss}>
       <Hole />
       {MoleIsActive &&
         <MoleAnimated moleIndex={this.state.moleIndex} />
@@ -70,7 +70,6 @@ class MoleContainer extends React.Component {
   )
   }
 }
-
 
 MoleContainer.propTypes = {
   index: PropTypes.number.isRequired,
