@@ -13,7 +13,6 @@ import { moleWhacked, deactiveMoleInState } from '../../../actions'
 
 const styles = StyleSheet.create({
   containerAnimation: {
-    // zIndex: .8,
     marginTop: 40,
     justifyContent: 'center',
     alignItems: 'center',
@@ -21,11 +20,19 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     position: 'relative',
   },
+ holeMask: {
+    position: "absolute",
+    height: 140,
+    width: 155,
+    zIndex: 5,
+    top: -10,
+    left: -5
+  },
   moleStyle: {
     height: 140,
     width: 140,
-    // zIndex: .9,
-    marginTop: -20,
+    zIndex: 1,
+    marginTop: -5
   }
 })
 
@@ -101,17 +108,14 @@ class Mole extends Component {
           }}
         >
           {this.state.moleVisible &&
-          <View>
             <TouchableOpacity
-              // style={{ position: 'relative' }}
-              onPress={this.handleTap}
+              style={{position: 'relative'}} onPress={this.handleTap}
             >
               <Image style={styles.moleStyle} source={require('../../../assets/mole.png')} resizeMode="contain" />
             </TouchableOpacity>
-          </View>
           }
         </Animated.View>
-
+          <Image style={styles.holeMask} source={require('../../../assets/holeMask.png')} resizeMode="contain" />
       </View>
     );
   }

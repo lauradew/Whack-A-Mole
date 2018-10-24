@@ -7,22 +7,19 @@ import {
 
 const styles = StyleSheet.create({
   containerAnimation: {
-    zIndex: 0,
     position: 'absolute',
-    justifyContent: 'center',
-    alignItems: 'center',
-    alignSelf: 'center',
     backgroundColor: 'transparent'
   },
   holeImg: {
     height: 140,
     width: 140,
     borderRadius: 50,
-     backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
+    zIndex: 5
   },
   holeMask: {
     position: 'absolute',
-    zIndex: 1,
+    zIndex: 2,
     left: -5,
     width: 155,
     justifyContent: 'center',

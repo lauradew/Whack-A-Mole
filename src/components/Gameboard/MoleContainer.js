@@ -12,18 +12,12 @@ import { moleMissed } from '../../../actions'
 
 const styles = StyleSheet.create({
   containerMoleAndHole: {
-    height: 140,
-    justifyContent: 'center',
-    alignContent: 'center',
-    alignSelf: 'center',
     borderRadius: 50,
     width: 140,
+    position: 'relative',
   },
-  inner: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 50,
-    width: 140,
+  tap: {
+    position: 'absolute'
   }
 })
 
@@ -33,8 +27,6 @@ const mapStateToProps = (store) => {
     gameOn: store.gameReducer.gameOn,
   }
 }
-
-// const MoleContainer = ({ index, board, gameOn, dispatch }) => {
 
 class MoleContainer extends React.Component {
   constructor(props) {
@@ -60,10 +52,10 @@ class MoleContainer extends React.Component {
   const MoleIsActive = this.props.board[this.state.moleIndex]
   return (
     <View style={styles.containerMoleAndHole} >
-      <TouchableOpacity style={styles.containerMoleAndHole} onPress={this.handleMiss}>
+      <TouchableOpacity style={styles.tap} onPress={this.handleMiss}>
       <Hole />
       {MoleIsActive &&
-        <MoleAnimated moleIndex={this.state.moleIndex} />
+        <MoleAnimated style={{zIndex:-4}} moleIndex={this.state.moleIndex} />
       }
       </TouchableOpacity>
     </View>
